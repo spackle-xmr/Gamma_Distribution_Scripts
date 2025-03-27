@@ -14,6 +14,9 @@ def read_file_to_list(filename):
     with open(filename, 'r') as f:
         for line in f:
             clean_line = line.strip()
+            if clean_line == '0':
+                print('Removing 0 entry')
+                break
             if clean_line:  # skip empty lines
                 try:
                     lines.append(int(clean_line)) # Append valid integers to lines
@@ -70,7 +73,7 @@ scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
-# Create Neutral Net
+# Create Neural Net
 model = keras.Sequential([
     keras.layers.Dense(128, activation='relu', input_shape=(ringsize,)),
     keras.layers.Dense(128, activation='relu'),
