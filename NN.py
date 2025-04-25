@@ -77,10 +77,10 @@ X_test = scaler.transform(X_test)
 
 # Create Neural Net
 model = keras.Sequential([
-    keras.layers.Dense(128, activation='mish', input_shape=(ringsize,)),
-    keras.layers.Dense(128, activation='mish'),
-    keras.layers.Dense(64, activation='mish'),
-    keras.layers.Dense(32, activation='mish'),
+    keras.layers.Dense(128, activation='relu', input_shape=(ringsize,)),
+    keras.layers.Dense(128, activation='relu'),
+    keras.layers.Dense(64, activation='relu'),
+    keras.layers.Dense(32, activation='relu'),
     keras.layers.Dense(1, activation='sigmoid')
 ])
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
