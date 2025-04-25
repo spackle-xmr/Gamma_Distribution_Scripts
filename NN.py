@@ -6,8 +6,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import confusion_matrix
 
-def chunk_list(lst, n=16):
-    return [lst[i:i+n] for i in range(0, len(lst), n)]
+def split_and_sort(lst):
+    result = []
+    for i in range(0, len(lst), 16):
+        chunk = lst[i:i+16]
+        sorted_chunk = sorted(chunk)
+        result.append(sorted_chunk)
+    return result
 
 def read_file_to_list(filename):
     lines = []
@@ -43,9 +48,9 @@ for i in range(samplesize * ringsize):
     newnumbers[i] = np.log(newnumbers[i])
     oldnumbers[i] = np.log(oldnumbers[i])
 
-# Chunk Data Into Rings
-new2d = chunk_list(newnumbers, ringsize) 
-old2d = chunk_list(oldnumbers, ringsize)
+# Chunk Data Into Rings With Members Ordered By Age
+new2d = split_and_sort(newnumbers) 
+old2d = split_and_sort(oldnumbers)
 
 # Only Include Complete Rings
 new2d = new2d[:samplesize]
